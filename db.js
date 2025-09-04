@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     await mongoose.connect(
-        "mongodb+srv://gymAdmin:gym123@gymcluster.4dp5a2v.mongodb.net/?retryWrites=true&w=majority&appName=GymCluster",
-      {
+process.env.mongoURI,      {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       }
