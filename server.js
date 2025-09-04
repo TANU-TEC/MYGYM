@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB URI
-const mongoURI = "mongodb+srv://gymAdmin:gym123@gymcluster.4dp5a2v.mongodb.net/GymDB?retryWrites=true&w=majority&appName=GymCluster";
+const mongoURI = process.env.mongoURI;
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('✅ MongoDB Connected to Atlas'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
