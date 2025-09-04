@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Classes - My Gym</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+<nav>
+    <div class="logo">My Gym</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="classes.html" class="active">Classes</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button id="darkToggle">🌙</button>
+</nav>
+</header>
+
+<!-- Hero Section -->
+<section class="classes-hero" style="background-image:url('images/classes-banner.jpg');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1>Our Classes</h1>
+        <p>Find the perfect class to reach your fitness goals</p>
+    </div>
+</section>
+
+<!-- Class Filter -->
+<section class="class-filter container">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="yoga">Yoga</button>
+    <button class="filter-btn" data-filter="cardio">Cardio</button>
+    <button class="filter-btn" data-filter="strength">Strength</button>
+    <button class="filter-btn" data-filter="hiit">HIIT</button>
+</section>
+
+<!-- Classes Grid -->
+<section class="classes-section container">
+    <div class="class-card yoga">
+        <img src="images/yoga.jpg" alt="Yoga">
+        <div class="class-overlay">
+            <h3>Yoga</h3>
+            <p>Improve flexibility, balance, and mindfulness.</p>
+            <p><strong>Instructor:</strong> Jane Smith</p>
+            <a href="membership.html" class="btn">Join Now</a>
+        </div>
+    </div>
+    <div class="class-card cardio">
+        <img src="images/cardio.jpg" alt="Cardio">
+        <div class="class-overlay">
+            <h3>Cardio Training</h3>
+            <p>Boost stamina and heart health with high-energy workouts.</p>
+            <p><strong>Instructor:</strong> Mike Johnson</p>
+            <a href="membership.html" class="btn">Join Now</a>
+        </div>
+    </div>
+    <div class="class-card strength">
+        <img src="images/strength.jpg" alt="Strength Training">
+        <div class="class-overlay">
+            <h3>Strength Training</h3>
+            <p>Build muscle and endurance with modern gym equipment.</p>
+            <p><strong>Instructor:</strong> John Doe</p>
+            <a href="membership.html" class="btn">Join Now</a>
+        </div>
+    </div>
+    <div class="class-card hiit">
+        <img src="images/hiit.jpg" alt="HIIT">
+        <div class="class-overlay">
+            <h3>HIIT</h3>
+            <p>High-Intensity Interval Training to burn calories fast.</p>
+            <p><strong>Instructor:</strong> Sarah Lee</p>
+            <a href="membership.html" class="btn">Join Now</a>
+        </div>
+    </div>
+    <div class="class-card pilates">
+        <img src="images/pilates.jpg" alt="Pilates">
+        <div class="class-overlay">
+            <h3>Pilates</h3>
+            <p>Enhance core strength, posture, and overall body control.</p>
+            <p><strong>Instructor:</strong> Emma Watson</p>
+            <a href="membership.html" class="btn">Join Now</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+<p>&copy; 2025 My Gym. All Rights Reserved.</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+// Filter Classes
+const filterBtns = document.querySelectorAll('.filter-btn');
+const classCards = document.querySelectorAll('.class-card');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+
+        classCards.forEach(card => {
+            if(filter === 'all') card.style.display = 'block';
+            else if(card.classList.contains(filter)) card.style.display = 'block';
+            else card.style.display = 'none';
+        });
+    });
+});
+</script>
+
+</body>
+</html>

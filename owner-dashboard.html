@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Owner Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-center">Contact Form Submissions</h1>
+        <div id="messages-container" class="space-y-4">
+            <p id="loading-text" class="text-center text-gray-500">Loading messages...</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const messagesContainer = document.getElementById('messages-container');
+            const loadingText = document.getElementById('loading-text');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/owner/messages');
+                const messages = await response.json();
+                loadingText.remove();
+
+                if (messages.length === 0) {
+                    messagesContainer.innerHTML = '<p class="text-center text-gray-500">No messages found.</p>';
+                } else {
+                    messages.forEach(msg => {
+                        const card = document.createElement('div');
+                        card.className = 'bg-gray-100 p-4 rounded-lg border border-gray-300';
+                        card.innerHTML = `
+                            <h2 class="text-xl font-semibold">${msg.name}</h2>
+                            <p class="text-gray-600"><strong>Email:</strong> ${msg.email}</p>
+                            <p class="text-gray-600"><strong>Phone:</strong> ${msg.phone || 'N/A'}</p>
+                            <p class="text-gray-800 mt-2">${msg.message}</p>
+                            <p class="text-sm text-gray-400 mt-2">Received on: ${new Date(msg.date).toLocaleString()}</p>
+                        `;
+                        messagesContainer.appendChild(card);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                messagesContainer.innerHTML = `<p class="text-center text-red-500">Error loading messages. Please ensure the server is running.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Details - My Gym</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background: #f4f4f4;
+      color: #333;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    body.dark-mode {
+      background: #121212;
+      color: #f0f0f0;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    
+    /* Header */
+    header {
+      background: #111;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    nav ul li {
+      margin-left: 20px;
+    }
+    
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    nav ul li a:hover, .active {
+      color: #e67e22;
+    }
+    
+    #darkToggle {
+      margin-left: 10px;
+      background: #e67e22;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    /* Hero Section */
+    .membership-hero {
+      position: relative;
+      height: 40vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    
+    .membership-hero .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    
+    .membership-hero .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .membership-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .membership-hero p {
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+    
+    /* Plan Details Section */
+    .plan-details {
+      flex: 1;
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    
+    .plan-details ul {
+      list-style: none;
+      margin-bottom: 30px;
+      text-align: left;
+      display: inline-block;
+      padding: 0;
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    .plan-details ul li {
+      font-size: 1.1rem;
+      margin: 12px 0;
+      padding: 12px 18px;
+      border-radius: 8px;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .plan-details ul li::before {
+      content: "✔";
+      color: #27ae60;
+      font-weight: bold;
+    }
+    
+    /* Join Button */
+    #joinBtn {
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: #e67e22;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+      margin-top: 30px;
+    }
+    
+    #joinBtn:hover {
+      background: #d35400;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+    }
+    
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    
+    /* Dark Mode */
+    body.dark-mode .plan-details ul li {
+      background: #1f1f1f;
+      color: #eee;
+    }
+    
+    body.dark-mode #joinBtn {
+      background: #e67e22;
+    }
+    
+    body.dark-mode #joinBtn:hover {
+      background: #d35400;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+      <div class="logo">My Gym</div>
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="classes.html">Classes</a></li>
+          <li><a href="trainers.html">Trainers</a></li>
+          <li><a href="membership.html" class="active">Membership</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button id="darkToggle">🌙</button>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="membership-hero" style="background-image:url('images/membership-banner.jpg');">
+  <div class="overlay"></div>
+  <div class="hero-content">
+      <h1 id="planName">Plan Name</h1>
+      <p id="planPrice">₹0 / month</p>
+  </div>
+</section>
+
+<!-- Plan Features -->
+<section class="plan-details container">
+  <ul id="planFeatures"></ul>
+  <a href="#" id="joinBtn">Join This Plan</a>
+</section>
+
+<footer>
+  <p>&copy; 2025 My Gym. All Rights Reserved.</p>
+</footer>
+
+<!-- JS Files -->
+<!-- <script src="js/common.js"></script> -->
+<script src="js/plan-details.js"></script>
+<script>
+  // Dark mode toggle functionality
+  document.getElementById('darkToggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    this.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
+</script>
+</body>
+</html>

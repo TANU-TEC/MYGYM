@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --danger: #e63946;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --light: #212529;
+            --dark: #f8f9fa;
+            --gray: #adb5bd;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+        }
+
+        .payment-container {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .plan-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .plan-box h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .payment-method-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .payment-form h3 {
+            margin: 20px 0 15px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .payment-section {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row > div {
+            flex: 1;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            color: var(--gray);
+        }
+
+        .summary-box {
+            background-color: #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+
+        .summary-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .dark-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: var(--danger);
+            background-color: #ffeaea;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            background-color: #eaffea;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .user-info {
+            background-color: #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: var(--primary);
+        }
+
+        .user-details p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .login-required {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .login-required i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .login-required h2 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .login-required p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .login-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        @media (max-width: 576px) {
+            .payment-container {
+                padding: 20px;
+            }
+           
+            .row {
+                flex-direction: column;
+                gap: 10px;
+            }
+           
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="header">
+            <div>
+                <h1>💳 Complete Your Payment</h1>
+                <p class="subtitle">Secure payment for your selected membership plan</p>
+            </div>
+            <button class="dark-toggle" id="darkToggle">🌙</button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <!-- Login Required Section -->
+        <div class="login-required" id="loginRequired">
+            <i class="fas fa-lock"></i>
+            <h2>Login Required</h2>
+            <p>You need to login to complete your payment</p>
+            <a href="login.html?redirect=payment.html" class="login-btn">Login to Continue</a>
+        </div>
+
+        <!-- Payment Form (Initially Hidden) -->
+        <div id="paymentFormContainer" style="display: none;">
+            <!-- User Info Section -->
+            <div class="user-info" id="userInfo">
+                <div class="user-details">
+                    <h3 id="userName">Loading...</h3>
+                    <p id="userEmail">Loading...</p>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+
+            <div class="plan-box">
+                <h2>Selected Plan: <span id="plan-name">Loading...</span></h2>
+                <p class="plan-price" id="plan-price">₹0 / month</p>
+            </div>
+
+            <div class="payment-method-tabs">
+                <div class="tab active" data-tab="card">Credit Card</div>
+                <div class="tab" data-tab="upi">UPI</div>
+                <div class="tab" data-tab="bank">Net Banking</div>
+            </div>
+
+            <form class="payment-form" id="paymentForm">
+                Card Payment Section
+                <div class="payment-section active" id="card-section">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" id="card-number">
+                    <div class="card-icons">
+                        <i class="fab fa-cc-visa card-icon"></i>
+                        <i class="fab fa-cc-mastercard card-icon"></i>
+                        <i class="fab fa-cc-amex card-icon"></i>
+                    </div>
+                   
+                    <div class="row">
+                        <div>
+                            <label>Expiry Date</label>
+                            <input type="text" placeholder="MM/YY" id="expiry">
+                        </div>
+                        <div>
+                            <label>CVV</label>
+                            <input type="password" placeholder="***" id="cvv">
+                        </div>
+                    </div>
+                   
+                    <div>
+                        <label>Cardholder Name</label>
+                        <p id="display-card-name" style="padding: 12px 15px; background-color: #f8f9fa; border-radius: 8px; margin-top: 8px;">Loading...</p>
+                    </div>
+                </div>
+
+                UPI Payment Section
+                <div class="payment-section" id="upi-section">
+                    <label>UPI ID</label>
+                    <input type="text" placeholder="yourname@upi" id="upi-id">
+                    <p style="margin-top: 10px; color: var(--gray); font-size: 14px;">
+                        <i class="fas fa-info-circle"></i> You'll be redirected to your UPI app for payment
+                    </p>
+                </div>
+
+                Bank Payment Section
+                <div class="payment-section" id="bank-section">
+                    <label>Select Bank</label>
+                    <select id="bank-select">
+                        <option value="">-- Choose Bank --</option>
+                        <option>State Bank of India</option>
+                        <option>HDFC Bank</option>
+                        <option>ICICI Bank</option>
+                        <option>Axis Bank</option>
+                        <option>Kotak Mahindra Bank</option>
+                    </select>
+                    <p style="margin-top: 10px; color: var(--gray); font-size: 14px;">
+                        <i class="fas fa-info-circle"></i> You'll be redirected to your bank's portal for payment
+                    </p>
+                </div>
+
+                <div class="summary-box">
+                    <h3>Your Plan</h3>
+                    <p><span id="paymentPlanName">Loading...</span></p>
+                    <p class="summary-price"><span id="paymentPlanPrice">₹0 / month</span></p>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Processing payment...</p>
+                </div>
+
+                <button type="button" class="pay-btn" id="payButton">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Update these values for your setup
+        const CONFIG = {
+            razorpayKey: "rzp_test_RCeW2dz4QppzaW", // Replace with your Razorpay test key
+            backendUrl: "http://localhost:5000",   // Your backend server URL
+            useMock: false,                         // Set to false when backend is ready
+            mockDelay: 2000                        // Mock response delay in ms
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Force login check - always redirect to login
+            forceLoginRedirect();
+
+            // Dark Mode Toggle
+            const darkToggle = document.getElementById('darkToggle');
+            darkToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                darkToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            });
+
+            // Get plan from URL or default to standard
+            const urlParams = new URLSearchParams(window.location.search);
+            const planParam = urlParams.get('plan');
+            const plans = {
+                basic: { name: "Basic Plan", price: "₹999 / month", amount: 999 },
+                standard: { name: "Standard Plan", price: "₹1999 / month", amount: 1999 },
+                premium: { name: "Premium Plan", price: "₹2999 / month", amount: 2999 }
+            };
+
+            // Set default plan if none specified
+            const plan = planParam && plans[planParam] ? planParam : 'standard';
+
+            // Update plan details
+            if (plans[plan]) {
+                document.getElementById("plan-name").innerText = plans[plan].name;
+                document.getElementById("plan-price").innerText = plans[plan].price;
+                document.getElementById("paymentPlanName").innerText = plans[plan].name;
+                document.getElementById("paymentPlanPrice").innerText = plans[plan].price;
+                window.selectedPlan = plans[plan];
+            }
+        });
+
+        // Force login redirect - always redirect to login page
+        function forceLoginRedirect() {
+            // Always show login required section
+            document.getElementById('loginRequired').style.display = 'block';
+            document.getElementById('paymentFormContainer').style.display = 'none';
+            
+            // Check if user is coming back from login
+            const urlParams = new URLSearchParams(window.location.search);
+            const justLoggedIn = urlParams.get('loggedin');
+            
+            if (justLoggedIn === 'true') {
+                // User just logged in, show payment form
+                showPaymentForm();
+            }
+        }
+
+        // Show payment form after login
+        function showPaymentForm() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (!token || !user) {
+                // Still not logged in, show login required
+                document.getElementById('loginRequired').style.display = 'block';
+                document.getElementById('paymentFormContainer').style.display = 'none';
+                return;
+            }
+            
+            // Show payment form
+            document.getElementById('loginRequired').style.display = 'none';
+            document.getElementById('paymentFormContainer').style.display = 'block';
+            
+            try {
+                const userData = JSON.parse(user);
+                document.getElementById('userName').textContent = userData.name;
+                document.getElementById('userEmail').textContent = userData.email;
+                document.getElementById('display-card-name').textContent = userData.name;
+                
+                // Setup payment form
+                setupPaymentForm();
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                // If there's an error, redirect to login
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                document.getElementById('loginRequired').style.display = 'block';
+                document.getElementById('paymentFormContainer').style.display = 'none';
+            }
+        }
+
+        // Setup payment form after login
+        function setupPaymentForm() {
+            // Logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.href = 'payment.html';
+                });
+            }
+
+            // Payment Method Tabs
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.payment-section');
+           
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                   
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                   
+                    // Show active section
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === `${tabId}-section`) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Payment validation and processing
+            const payButton = document.getElementById('payButton');
+            payButton.addEventListener('click', () => {
+                const activeTab = document.querySelector('.tab.active').getAttribute('data-tab');
+                processPayment(activeTab);
+            });
+
+            // Format card number with spaces
+            const cardNumberInput = document.getElementById('card-number');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', formatCardNumber);
+            }
+
+            // Format expiry date
+            const expiryInput = document.getElementById('expiry');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', formatExpiryDate);
+            }
+        }
+
+        function formatCardNumber(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let matches = value.match(/\d{4,16}/g);
+            let match = matches && matches[0] || '';
+            let parts = [];
+           
+            for (let i=0; i<match.length; i+=4) {
+                parts.push(match.substring(i, i+4));
+            }
+           
+            if (parts.length) {
+                e.target.value = parts.join(' ');
+            } else {
+                e.target.value = value;
+            }
+        }
+
+        function formatExpiryDate(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.innerText = message;
+            errorElement.style.display = 'block';
+           
+            // Hide after 5 seconds
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successElement = document.getElementById('successMessage');
+            successElement.innerText = message;
+            successElement.style.display = 'block';
+        }
+
+        function validatePaymentForm(paymentMethod) {
+            if (!window.selectedPlan) {
+                showError("Please select a plan first");
+                return false;
+            }
+
+            if (paymentMethod === 'card') {
+                const cardNumber = document.getElementById('card-number').value;
+                const expiry = document.getElementById('expiry').value;
+                const cvv = document.getElementById('cvv').value;
+               
+                if (!cardNumber || cardNumber.replace(/\s/g, '').length !== 16) {
+                    showError('Please enter a valid 16-digit card number');
+                    return false;
+                } else if (!expiry || !/^\d{2}\/\d{2}$/.test(expiry)) {
+                    showError('Please enter a valid expiry date in MM/YY format');
+                    return false;
+                } else if (!cvv || cvv.length !== 3) {
+                    showError('Please enter a valid 3-digit CVV');
+                    return false;
+                }
+            } else if (paymentMethod === 'upi') {
+                const upiId = document.getElementById('upi-id').value;
+                if (!upiId || !/^[\w.-]+@[\w.-]+$/.test(upiId)) {
+                    showError('Please enter a valid UPI ID (e.g., name@upi)');
+                    return false;
+                }
+            } else if (paymentMethod === 'bank') {
+                const bank = document.getElementById('bank-select').value;
+                if (!bank) {
+                    showError('Please select your bank');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        async function processPayment(paymentMethod) {
+            if (!validatePaymentForm(paymentMethod)) { return; }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('payButton').disabled = true;
+            document.getElementById('errorMessage').style.display = 'none';
+
+            try {
+                if (CONFIG.useMock) {
+                    await processMockPayment(paymentMethod);
+                } else {
+                    await processRealPayment(paymentMethod);
+                }
+            } catch (error) {
+                console.error("Payment Error:", error);
+                showError("Payment failed: " + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('payButton').disabled = false;
+            }
+        }
+
+        async function processMockPayment(paymentMethod) {
+            await new Promise(resolve => setTimeout(resolve, CONFIG.mockDelay));
+            showSuccess("✅ Payment successful! (Mock transaction)");
+            setTimeout(() => {
+                window.location.href = "membership-success.html?plan=" +
+                    (window.selectedPlan ? window.selectedPlan.name.toLowerCase().replace(' ', '-') : 'standard');
+            }, 2000);
+        }
+
+        async function processRealPayment(paymentMethod) {
+            // Get user data from localStorage
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const token = localStorage.getItem('token');
+            
+            const name = user.name || "Rana";
+            const email = user.email || "tanu@example.com";
+            const phone = user.phone || "9999999999";
+            const upiId = document.getElementById('upi-id').value;
+
+            // 1. Create a payment order on the backend
+            const response = await fetch(`${CONFIG.backendUrl}/api/payment/order`, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    amount: window.selectedPlan.amount,
+                    currency: "INR",
+                    plan: window.selectedPlan.name,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    paymentMethod: paymentMethod
+                })
+            });
+
+            const data = await response.json();
+
+            // 2. Check if the backend successfully created the order
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Could not create order on the backend.");
+            }
+
+            // 3. Configure and open the Razorpay Checkout popup
+            const options = {
+                key: CONFIG.razorpayKey,
+                amount: data.order.amount,
+                currency: data.order.currency,
+                name: "My Gym",
+                description: window.selectedPlan.name,
+                order_id: data.order.id,
+                handler: async function(response) {
+                    // This is the ONLY place where successful payment is handled
+                    await verifyPayment(response, data.paymentId);
+                },
+                prefill: { name: name, email: email, contact: phone },
+                notes: { plan: window.selectedPlan.name, paymentMethod: paymentMethod },
+                theme: { color: "#4361ee" }
+            };
+
+            if (paymentMethod === 'upi') {
+                options.prefill.vpa = upiId;
+                options.methods = { upi: 1 };
+            }
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        async function verifyPayment(response, paymentId) {
+            try {
+                const token = localStorage.getItem('token');
+                const verifyRes = await fetch(`${CONFIG.backendUrl}/api/payment/verify`, {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ ...response, paymentId: paymentId })
+                });
+               
+                const verifyData = await verifyRes.json();
+               
+                if (verifyData.success) {
+                    showSuccess("✅ Payment successful! Your membership is now active.");
+                    setTimeout(() => {
+                        window.location.href = "membership-success.html";
+                    }, 2000);
+                } else {
+                    showError("Payment verification failed: " + (verifyData.message || "Please contact support"));
+                }
+            } catch (error) {
+                console.error("Verification error:", error);
+                showError("Verification failed. Please contact support with your payment details.");
+            }
+        }
+    </script>
+</body>
+</html>

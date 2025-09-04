@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities - My Gym</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for footer positioning and animations */
+        html, body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+        }
+        
+        footer {
+            margin-top: auto;
+        }
+        
+        /* Facility card hover effect */
+        .facility-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .facility-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover .facility-icon {
+            transform: scale(1.2);
+        }
+        
+        /* Mobile menu toggle */
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+        }
+        
+        /* Header background */
+        .header-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <nav class="bg-black text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center">
+            <div class="w-full flex justify-between items-center">
+                <h1 class="text-2xl font-bold"><span class="text-yellow-500">MY GYM</span></h1>
+                <button class="mobile-menu text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <ul class="nav-links flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-4 md:mt-0">
+                <li><a href="index.html" class="hover:text-yellow-500 transition">Home</a></li>
+                <li><a href="about.html" class="hover:text-yellow-500 transition">About</a></li>
+                <li><a href="facilities.html" class="text-yellow-500 font-semibold">Facilities</a></li>
+                <li><a href="classes.html" class="hover:text-yellow-500 transition">Classes</a></li>
+                <li><a href="trainers.html" class="hover:text-yellow-500 transition">Trainers</a></li>
+                <li><a href="membership.html" class="hover:text-yellow-500 transition">Membership</a></li>
+                <li><a href="contact.html" class="hover:text-yellow-500 transition">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <header class="header-bg py-20 text-center text-white">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Our Facilities</h2>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto">Everything you need for a complete fitness experience</p>
+        </header>
+        
+        <section class="max-w-6xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">🤸</div>
+                    <h3 class="font-bold text-xl mb-3">Group Exercise</h3>
+                    <p class="text-gray-600">Engaging group workouts for all levels with experienced instructors.</p>
+                </div>
+                
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">🏋️</div>
+                    <h3 class="font-bold text-xl mb-3">Gym Floor</h3>
+                    <p class="text-gray-600">Spacious gym floor with top-notch equipment for all your workout needs.</p>
+                </div>
+                
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">🚴</div>
+                    <h3 class="font-bold text-xl mb-3">Cycle Studio</h3>
+                    <p class="text-gray-600">High-energy indoor cycling classes with motivating music and instructors.</p>
+                </div>
+                
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">💪</div>
+                    <h3 class="font-bold text-xl mb-3">Free Weights</h3>
+                    <p class="text-gray-600">Dumbbells, barbells, and more for strength training and muscle building.</p>
+                </div>
+                
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">🧘</div>
+                    <h3 class="font-bold text-xl mb-3">Yoga</h3>
+                    <p class="text-gray-600">Relax, stretch, and strengthen your body & mind with our yoga sessions.</p>
+                </div>
+                
+                <div class="facility-card bg-white shadow-lg p-8 rounded-xl text-center hover:shadow-xl transition-all duration-300">
+                    <div class="facility-icon text-5xl text-yellow-500 mb-4">🥗</div>
+                    <h3 class="font-bold text-xl mb-3">Nutrition Counseling</h3>
+                    <p class="text-gray-600">Personalized diet plans to match your fitness goals and lifestyle.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to experience our facilities?</h3>
+                <a href="membership.html" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    Join Now
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-gray-300 text-center py-6">
+        <div class="max-w-6xl mx-auto px-6">
+            <p>© 2025 My Gym. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

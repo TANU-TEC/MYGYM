@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Plans - My Gym</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+
+
+
+/* Membership Section */ 
+/* ================= Membership Section =================*/
+.membership-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 30px;
+  padding: 60px 0;
+}
+
+.plan {
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
+  padding: 30px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.plan:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  border: 2px solid #e67e22;
+}
+
+.plan.featured {
+  border: 2px solid #e67e22;
+  transform: scale(1.05);
+}
+
+.plan h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.plan .price {
+  font-size: 1.5rem;
+  color: #e67e22;
+  margin-bottom: 20px;
+}
+
+.plan ul {
+  list-style: none;
+  margin-bottom: 25px;
+  padding: 0;
+  text-align: left;
+
+}
+
+.plan ul li {
+  margin: 10px 0;
+  font-size: 1rem;
+  padding-left: 25px;
+  position: relative;
+}
+.plan ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #27ae60;
+  font-weight: bold;
+}
+
+
+.plan .btn {
+  background: #e67e22;
+  padding: 8px 18px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.plan .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+    <div class="logo">My Gym</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="membership.html" class="active">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button id="darkToggle">🌙</button>
+</nav>
+</header>
+
+<!-- Hero Section -->
+<section class="membership-hero" style="background-image:url('images/membership-banner.jpg');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1>Membership Plans</h1>
+        <p>Choose the plan that suits your fitness goals</p>
+    </div>
+</section>
+
+<!-- Membership Plans -->
+<section class="membership-plans container">
+    <div class="plan">
+        <h3>Basic Plan</h3>
+        <p class="price">₹999 / month</p>
+        <ul>
+            <li>Access to Gym Equipment</li>
+            <li>1 Personal Training Session</li>
+            <li>Free Fitness Assessment</li>
+        </ul>
+        <a href="plan-details.html?plan=basic" class="btn">View Details</a>
+    </div>
+    <div class="plan">
+        <h3>Standard Plan</h3>
+        <p class="price">₹1999 / month</p>
+        <ul>
+            <li>All Basic Plan Features</li>
+            <li>5 Personal Training Sessions</li>
+            <li>Access to Group Classes</li>
+            <li>Diet Consultation</li>
+        </ul>
+        <a href="plan-details.html?plan=standard" class="btn">View Details</a>
+    </div>
+    <div class="plan">
+        <h3>Premium Plan</h3>
+        <p class="price">₹2999 / month</p>
+        <ul>
+            <li>All Standard Plan Features</li>
+            <li>Unlimited Personal Training</li>
+            <li>Priority Class Booking</li>
+            <li>24/7 Gym Access</li>
+        </ul>
+        <a href="plan-details.html?plan=premium" class="btn">View Details</a>
+    </div>
+</section>
+
+<footer>
+<p>&copy; 2025 My Gym. All Rights Reserved.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Gym</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <header>
+    <nav>
+      <div class="logo">My Gym</div>
+      <ul id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="classes.html">Classes</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" id="signInBtn" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Sign In</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button id="darkToggle">🌙</button>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Hero Section with Gym Banner -->
+  <section class="hero-slider" style="background-image:url('images/gym-banner.jpg');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Transform Your Body</h1>
+      <p>Expert Trainers | Modern Equipment | Personal Guidance</p>
+      <div class="hero-btns">
+        <a href="membership.html" class="btn">Join Now</a>
+        <a href="classes.html" class="btn-outline">Explore Classes</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="features container">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="images/class1.jpg" alt="Classes">
+        <h3>Expert Classes</h3>
+        <p>Yoga, Cardio, Strength Training & More.</p>
+      </div>
+      <div class="feature-card">
+        <img src="images/trainer1.jpg" alt="Trainers">
+        <h3>Professional Trainers</h3>
+        <p>Certified trainers to guide you at every step.</p>
+      </div>
+      <div class="feature-card">
+        <img src="images/gym-facility.jpg" alt="Facilities">
+        <h3>Modern Equipment</h3>
+        <p>State-of-the-art equipment for all fitness levels.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- BMI Calculator -->
+  <section class="bmi-section container">
+    <h2>BMI Calculator</h2>
+    <div class="bmi-card">
+      <input type="number" id="weight" placeholder="Weight (kg)">
+      <input type="number" id="height" placeholder="Height (cm)">
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <p id="bmiResult"></p>
+    </div>
+  </section>
+  
+ <!-- Call to Action -->
+ <section class="cta-section">
+  <h2>Start Your Transformation Today</h2>
+  <p>Join My Gym and take the first step toward your fitness goals.</p>
+  <a href="membership.html" class="btn">Get Started</a>
+</section>
+
+<footer>
+  <p>&copy; 2025 My Gym. All Rights Reserved.</p>
+</footer>
+
+  
+  <script src="js/script.js"></script>
+  </body>
+  </html>

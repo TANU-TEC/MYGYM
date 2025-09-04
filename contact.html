@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Gym Website</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    .response-message {
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .success-message {
+      background-color: #eaffea;
+      color: #28a745;
+      border: 1px solid #28a745;
+    }
+    
+    .error-message {
+      background-color: #ffeaea;
+      color: #e63946;
+      border: 1px solid #e63946;
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+    }
+    
+    .loading-spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #fbbf24;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-black text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center">
+      <h1 class="text-2xl font-bold absolute left-6 md:left-0"><span class="text-yellow-500">MY GYM</span></h1>
+      <ul class="hidden md:flex space-x-8">
+        <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
+        <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
+        <li><a href="facilities.html"class="hover:text-yellow-500">Facilities</a></li>
+        <li><a href="classes.html" class="hover:text-yellow-500">Classes</a></li>
+        <li><a href="trainers.html" class="hover:text-yellow-500">Trainers</a></li>
+        <li><a href="membership.html" class="hover:text-yellow-500">Membership</a></li>
+        <li><a href="contact.html" class="text-yellow-500 font-semibold">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Contact Section -->
+  <section class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-16">
+    <!-- Background Banner -->
+    <div class="absolute inset-0">
+      <img src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg" alt="Gym Background" class="w-full h-full object-cover opacity-30">
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12">
+      <!-- Contact Info -->
+      <div class="space-y-6">
+        <h2 class="text-4xl font-bold border-b-4 border-yellow-500 inline-block pb-2">Get in Touch</h2>
+        <p class="text-gray-300 text-lg">Have questions? Reach out to us and we'll get back to you shortly.</p>
+        
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <i data-feather="map-pin" class="w-6 h-6 text-yellow-500"></i>
+            <span>Panuwanaula, Almora, Uttarakhand, India</span>
+          </div>
+          
+          <div class="flex items-center space-x-4">
+            <i data-feather="phone" class="w-6 h-6 text-yellow-500"></i>
+            <span>+91 7505183483</span>
+          </div>
+          
+          <div class="flex items-center space-x-4">
+            <i data-feather="mail" class="w-6 h-6 text-yellow-500"></i>
+            <span>tanur2418@gmail.com</span>
+          </div>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="flex space-x-6 mt-6">
+          <a href="#" class="hover:text-yellow-500"><i data-feather="facebook"></i></a>
+          <a href="#" class="hover:text-yellow-500"><i data-feather="instagram"></i></a>
+          <a href="#" class="hover:text-yellow-500"><i data-feather="twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- Contact Form -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-gray-800">
+        <h3 class="text-2xl font-semibold mb-6">Send Us a Message</h3>
+        
+        <form id="contactForm" class="space-y-4">
+          <input type="text" id="name" placeholder="Your Name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500">
+          <input type="email" id="email" placeholder="Your Email" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500">
+          <input type="tel" id="phone" placeholder="Your Phone (e.g. +91 98765 43210)" pattern="^(\+?\d{1,3}[- ]?)?\d{10}$" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500">
+          <textarea rows="5" id="message" placeholder="Your Message" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500"></textarea>
+          
+          <button type="submit" id="submitBtn" class="w-full bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition">
+            Send Message
+          </button>
+          
+          <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Sending your message...</p>
+          </div>
+          
+          <div id="responseMessage" class="response-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Initialize Feather icons
+    feather.replace();
+    
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const responseMessage = document.getElementById("responseMessage");
+      const loading = document.getElementById("loading");
+      const submitBtn = document.getElementById("submitBtn");
+      
+      // Reset response message
+      responseMessage.style.display = "none";
+      responseMessage.className = "response-message";
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        responseMessage.textContent = "Please enter a valid email address.";
+        responseMessage.classList.add("error-message");
+        responseMessage.style.display = "block";
+        return;
+      }
+      
+      // Mobile number validation (10 digits, India example)
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        responseMessage.textContent = "Please enter a valid 10-digit mobile number.";
+        responseMessage.classList.add("error-message");
+        responseMessage.style.display = "block";
+        return;
+      }
+      
+      // Show loading
+      loading.style.display = "block";
+      submitBtn.disabled = true;
+      
+      try {
+        const res = await fetch("http://localhost:5000/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone, message })
+        });
+        
+        const data = await res.json();
+        
+        // Hide loading
+        loading.style.display = "none";
+        submitBtn.disabled = false;
+        
+        if (data.success) {
+          // Show success message
+          responseMessage.textContent = "✅ Your message has been sent successfully! Redirecting...";
+          responseMessage.classList.add("success-message");
+          responseMessage.style.display = "block";
+          
+          // Reset form
+          document.getElementById("contactForm").reset();
+          
+          // Refresh page after 2 seconds
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          // Show error message
+          responseMessage.textContent = data.message || "Something went wrong. Please try again.";
+          responseMessage.classList.add("error-message");
+          responseMessage.style.display = "block";
+        }
+      } catch (err) {
+        // Hide loading
+        loading.style.display = "none";
+        submitBtn.disabled = false;
+        
+        // Show error message
+        responseMessage.textContent = "Network error. Please check your connection and try again.";
+        responseMessage.classList.add("error-message");
+        responseMessage.style.display = "block";
+        console.error('Contact Form Error:', err);
+      }
+    });
+  </script>
+</body>
+</html>

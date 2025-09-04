@@ -1,0 +1,838 @@
+/* General */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {background:#f4f4f4;color:#333;transition:0.3s;}
+body.dark-mode {background:#121212;color:#f0f0f0;}
+.container {width:90%;max-width:1200px;margin:auto;}
+/* Header */
+header {background:#111;color:#fff;position:sticky;top:0;z-index:1000;}
+nav {display:flex;justify-content:space-between;align-items:center;padding:15px 0;}
+nav ul {list-style:none;display:flex;flex-wrap:wrap;}
+nav ul li {margin-left:20px;}
+nav ul li a {color:#fff;text-decoration:none;font-weight:bold;transition:0.3s;}
+nav ul li a:hover,.active {color:#e67e22;}
+#darkToggle {margin-left:10px;background:#e67e22;border:none;padding:5px 10px;cursor:pointer;border-radius:5px;}
+/*home*/
+/* General Reset */
+/* ========= Global Styles ========= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background: #f5f5f5;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #111;
+    font-weight: 700;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #f39c12;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  /* ========= Navbar ========= */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  nav .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f39c12;
+    text-transform: uppercase;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: #f39c12;
+  }
+  
+  .nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  #signInBtn {
+    background: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #signInBtn:hover {
+    background: #e67e22;
+  }
+  /* ========= Hero Section ========= */
+  .hero-slider {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+  }
+  
+  .hero-slider .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 700px;
+    z-index: 2;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f39c12;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+  
+  .hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .btn, .btn-outline {
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .btn {
+    background: #f39c12;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    background: #d35400;
+  }
+  
+  .btn-outline {
+    border: 2px solid #f39c12;
+    color: #f39c12;
+    background: transparent;
+  }
+  
+  .btn-outline:hover {
+    background: #f39c12;
+    color: #fff;
+  }
+  
+  /* ========= Features ========= */
+  .features {
+    padding: 60px 0;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .feature-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .feature-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .feature-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: #111;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+ 
+  
+  /* ========= BMI Calculator ========= */
+  .bmi-section {
+    text-align: center;
+    padding: 60px 0;
+  }
+  
+  .bmi-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .bmi-card input {
+    width: 45%;
+    padding: 12px;
+    margin: 10px 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  .bmi-card button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #f39c12;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .bmi-card button:hover {
+    background: #d35400;
+  }
+  
+  #bmiResult {
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  /* ========= CTA Section ========= */
+  .cta-section {
+    text-align: center;
+    background: linear-gradient(45deg, #111, #222);
+    color: #fff;
+    padding: 60px 20px;
+    margin-bottom: 0; /* Remove bottom margin */
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #f39c12;
+  }
+  
+  .cta-section p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+  }
+  
+  .cta-section .btn {
+    margin-bottom: 0; /* Remove bottom margin from the button */
+  }
+  
+ 
+  /* ========= Responsive ========= */
+  @media(max-width: 768px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      background: #111;
+      position: absolute;
+      top: 70px;
+      right: 0;
+      width: 200px;
+      padding: 15px;
+    }
+  
+    nav ul.show {
+      display: flex;
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+  
+    .hero-content p {
+      font-size: 1rem;
+    }
+  
+    .bmi-card input {
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+
+  
+  /* About Hero */
+.about-hero {
+    background: url('images/gym-about.jpg') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+  }
+  
+  .about-hero .overlay {
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  /* ----------------- ABOUT PAGE ----------------- */
+
+/* Hero */
+.about-hero {
+    position: relative;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+  .about-hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+  }
+  .about-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  .about-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .about-hero p {
+    font-size: 20px;
+    opacity: 0.9;
+  }
+  
+  /* Story Section */
+  .about-story {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 80px 60px;
+  }
+  .about-story .story-image img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+  }
+  .about-story .story-text h2 {
+    font-size: 32px;
+    margin-bottom: 18px;
+    color: #222;
+  }
+  .about-story .story-text p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+  @media(max-width: 900px) {
+    .about-story {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  /* Mission, Vision, Values */
+  .about-mv {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 70px 60px;
+    text-align: center;
+  }
+  .mv-card {
+    background: #fff;
+    padding: 35px 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .mv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+  .mv-card img {
+    width: 100px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    transition: transform 0.3s ease;
+  }
+  .mv-card img:hover {
+  transform: scale(1.1);
+  }
+  .mv-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #222;
+  }
+  .mv-card p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.7;
+  }
+  
+  /* Why Choose Us */
+  .about-why {
+    padding: 80px 60px;
+    text-align: center;
+  }
+  .about-why h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 45px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  .why-card {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .why-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+  .why-card img {
+    width: 200px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+    transition: transform 0.3s ease;
+  }
+  .why-card img:hover {
+    transform: scale(1.1) rotate(3deg);
+  }
+  .why-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .why-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Call To Action */
+  .about-cta {
+    background: linear-gradient(45deg, #111, #222);
+    padding: 80px 30px;
+    text-align: center;
+    color: #fff;
+  }
+  .about-cta h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  .about-cta p {
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+  .about-cta .btn-primary {
+    background: #fff;
+    color: #ff5722;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .about-cta .btn-primary:hover {
+    background: #222;
+    color: #fff;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Dark Mode Support */
+  body.dark .mv-card,
+  body.dark .why-card {
+    background: #222;
+    color: #eee;
+  }
+  body.dark .mv-card p,
+  body.dark .why-card p {
+    color: #aaa;
+  }
+  /*triners*/
+  .trainers-page {
+    background-color: rgba(0,0,0,0.45); /* dark overlay for whole trainers page */
+}
+
+  .trainers-hero {
+    position: relative;
+    height: 65vh;
+    background: url('../images/trainers-bg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+/* Optional overlay */
+.trainers-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5); /* adjust darkness */
+    z-index: 1;
+}
+
+.trainers-hero .hero-content {
+    position: relative;
+    z-index: 2; /* content above overlay */
+    animation: fadeInUp 1s ease forwards;
+}
+
+.trainers-hero h1 {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.trainers-hero p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+    .trainers-hero h1 {
+        font-size: 36px;
+    }
+    .trainers-hero p {
+        font-size: 16px;
+    }
+}
+
+
+
+/* Trainers Section */
+.trainers {
+    display: grid;
+    position: relative; /* needed for overlay */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+    padding: 80px 60px;
+    text-align: center;
+    color: #fff; /* in case you want white text on top */
+    
+}
+
+.trainers::before {
+    display: none;
+}
+.trainer-card {
+    position: relative;
+    z-index: 2; /* show cards above overlay */
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+}
+.trainer-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* hover shadow */
+    transform: translateY(-5px);
+    border: 2px solid #e67e22;
+}
+.trainer-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    border: none; /* Colored border */
+}
+.trainer-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.trainer-card p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Social Links */
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    color: #555; /* icon color */
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ff5722; /* hover color */
+}
+
+
+/* Responsive */
+@media(max-width: 900px) {
+    .trainers {
+        padding: 60px 20px;
+    }
+    .trainers-hero h1 {
+        font-size: 36px;
+    }
+    .trainers-hero p {
+        font-size: 16px;
+    }
+}
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  color: #333;
+  transition: 0.3s;
+}
+
+body.dark-mode {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f39c12;
+  text-transform: uppercase;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #f39c12;
+}
+
+#darkToggle {
+  margin-left: 10px;
+  background: #e67e22;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+}
+
+/* Hero Section */
+.about-hero {
+  position: relative;
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.about-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.about-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.about-hero h2 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.about-hero p {
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+
+
+
+
+/* Classes Section */
+.class-filter {text-align:center;margin:30px 0;}
+.filter-btn {padding:10px 20px;margin:5px;background:#fff;border:1px solid #e67e22;color:#e67e22;border-radius:8px;cursor:pointer;transition:0.3s;}
+.filter-btn.active, .filter-btn:hover {background:#e67e22;color:#fff;}
+.classes-section {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;padding:60px 0;}
+.class-card img{width:100%;height:200px;object-fit:cover;border-radius:15px;transition:transform 0.3s;}
+.class-card:hover img {transform:scale(1.1);}
+.class-card h3 {margin:15px 0 10px;color:#e67e22;}
+.class-card p {color:#555;font-size:1rem;line-height:1.5;}
+.class-card .btn {display:inline-block;margin-top:15px;padding:10px 20px;background:#e67e22;color:#fff;border-radius:8px;text-decoration:none;font-weight:bold;transition:all 0.3s ease-in-out;}
+.class-card .btn:hover {transform:scale(1.05);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+
+/* BMI Section */
+.bmi-section{text-align:center;padding:60px 0;}
+.bmi-section input{margin:5px;padding:10px;border-radius:8px;border:1px solid #ccc;width:150px;}
+.bmi-section button{padding:10px 20px;border:none;background:#e67e22;color:#fff;border-radius:8px;cursor:pointer;transition:0.3s;}
+.bmi-section button:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+
+/* Stats Section */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));text-align:center;gap:30px;padding:60px 0;background:#f9f9f9;border-radius:15px;margin:40px 0;}
+.stat h2{font-size:2.5rem;color:#e67e22;}
+.stat p{font-size:1rem;color:#555;}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* Footer */
+footer{text-align:center;padding:20px;background:#111;color:#fff;margin-top:0px;}
+
+/* Responsive */
+@media(max-width:768px){
+    .hero-content h1,.about-hero h1,.trainers-hero h1,.membership-hero h1,.classes-hero h1{font-size:2rem;}
+    .hero-content p,.about-hero p,.trainers-hero p,.membership-hero p,.classes-hero p{font-size:1rem;}
+    .features,.about-content,.trainers,.membership-plans,.classes-section,.team-grid,.mission-vision{grid-template-columns:1fr;}
+    .about-story{flex-direction:column;}
+}
